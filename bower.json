@@ -1,0 +1,19 @@
+{
+  "name": "hipslack",
+  "version": "0.0.1",
+  "description": "hipchat's ui like slack",
+  "main": "index.html",
+  "authors": [
+    "kheiakiyama"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
