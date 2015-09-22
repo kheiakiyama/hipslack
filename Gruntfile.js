@@ -433,6 +433,17 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+    
+    bowerInstall: {
+      target: {
+        // Point to the files that should be updated when 
+        // you run `grunt bower-install` 
+        src: [
+          'app/views/**/*.html',   // .html support... 
+          'app/styles/main.scss'  // .scss & .sass support... 
+        ]
+      }
     }
   });
 
@@ -489,4 +500,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+  grunt.loadNpmTasks('grunt-bower-install');
 };
