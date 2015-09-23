@@ -23,9 +23,11 @@
     <div class="container" ng-controller="MainCtrl">
       <div class="navbar">
         <div ng-click="roomsClick()">Rooms</div>
+        <div data-ng-include="'views/active-rooms.html'"></div>
       </div>
       <div class="main-content">
         <div ng-include="'views/rooms.html'" ng-controller="RoomsCtrl" ng-if="show_rooms"></div>
+        <div ng-include="'views/messages.html'" nng-if="show_messages"></div>
       </div>
     </div>
 
