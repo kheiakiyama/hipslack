@@ -9,4 +9,11 @@
  * Main module of the application.
  */
 angular
-  .module('hipslackApp', []);
+  .module('hipslackApp', ['hipslackApp.config']);
+
+angular
+  .module('hipslackApp.config', [])
+  .constant('config', {
+    'backend': 'https://api.hipchat.com',
+    'authkey': 'xxx'
+  })
