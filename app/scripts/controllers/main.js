@@ -8,7 +8,7 @@
  * Controller of the hipslackApp
  */
 angular.module('hipslackApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, Messages) {
     $scope.show_rooms = false;
     $scope.show_messages = false;
     $scope.roomsClick = function() {
@@ -16,7 +16,9 @@ angular.module('hipslackApp')
       $scope.show_messages = false;
     };
     $scope.activeMessages = function(messages) {
-      $scope.messages = messages;
+      Messages.set(messages, function(list) {
+        $scope.messages = list;
+      });
       $scope.show_rooms = false;
       $scope.show_messages = true;
     };
