@@ -12,6 +12,36 @@ body {
   padding: 0;
 }
 
+ul {
+  list-style-type: none;
+  -webkit-padding-start: 0;
+}
+
+.float-left {
+  float: left;
+}
+
+.clear-fix {
+  *zoom: 1;
+}
+.clear-fix:before,
+.clear-fix:after {
+  content: " ";
+  display: table;
+}
+
+.clear-fix:after {
+  clear: both;
+}
+
+#col-rooms {
+  width: 230px;
+}
+
+#main-content {
+  margin-left: 230px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

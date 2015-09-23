@@ -21,20 +21,18 @@
 
     <!-- Add your site or application content here -->
     <div class="container" ng-controller="MainCtrl">
-      <div class="navbar">
+      <div id="col-rooms" class="float-left">
         <div ng-click="roomsClick()">Rooms</div>
         <div data-ng-include="'views/active-rooms.html'"></div>
       </div>
-      <div class="main-content">
+      <div id="main-content">
         <div ng-include="'views/rooms.html'" ng-controller="RoomsCtrl" ng-if="show_rooms"></div>
-        <div ng-include="'views/messages.html'" nng-if="show_messages"></div>
+        <div ng-include="'views/messages.html'" ng-if="show_messages"></div>
       </div>
     </div>
 
     <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+      <div class="container">HipSlack</div>
     </div>
 
 

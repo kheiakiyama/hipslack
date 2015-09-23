@@ -14,9 +14,6 @@ angular.module('hipslackApp')
       $scope.rooms = data.items;
     });
     $scope.roomClick = function(room) {
-      var historyUri = config.backend + '/v2/room/' + room.id + '/history?auth_token=' + config.authkey;
-      $http.get(historyUri).success(function(data) {
-        $scope.$parent.activeMessages(data.items);
-      });
+      $scope.$parent.openRoom(room);
     };
   });
