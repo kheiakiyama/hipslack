@@ -17,7 +17,7 @@ angular.module('hipslackApp')
       messages.forEach(function(val, index) {
         var date = self._formatDate(val.date);
         items.push({ 
-          source: val, 
+          from: val.from.name ? val.from.name : val.from, 
           date: date, 
           message: self._formatMessage(val.message)
         });

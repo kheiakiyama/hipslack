@@ -23,6 +23,7 @@ module.exports = function(config) {
     files: [
       // bower:js
       'bower_components/angular/angular.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
       // endbower
       "app/scripts/**/*.js",
       "test/mock/**/*.js",

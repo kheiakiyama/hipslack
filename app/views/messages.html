@@ -1,9 +1,9 @@
 <ul ng-repeat="message in messages">
   <li class="row">
     <div>
-      <span>{{message.source.from.name}}</span>
+      <span>{{message.from}}</span>
       <span>{{message.date}}</span>
-      <span>{{message.message}}</span>
+      <div ng-bind-html="message.message"></div>
     </div>
   </li>
   <hr/>
