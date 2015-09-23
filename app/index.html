@@ -20,35 +20,12 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <a class="navbar-brand" href="#/">hipslack</a>
-          </div>
-
-          <div class="collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
-        </div>
+    <div class="container" ng-controller="MainCtrl">
+      <div class="navbar">
+        <div ng-click="roomsClick()">Rooms</div>
       </div>
-    </div>
-
-    <div class="container">
-      <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
-      <div ng-controller="RoomsCtrl">
-        <ul ng-repeat="room in rooms">
-          <li class="row">
-            <div>{{room.name}}</div>
-          </li>
-          <hr/>
-        </ul>
+      <div class="main-content">
+        <div ng-include="'views/rooms.html'" ng-controller="RoomsCtrl" ng-if="show_rooms"></div>
       </div>
     </div>
 

@@ -8,10 +8,9 @@
  * Controller of the hipslackApp
  */
 angular.module('hipslackApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope) {
+    $scope.show_rooms = false;
+    $scope.roomsClick = function() {
+      $scope.show_rooms = true;
+    };
   });
