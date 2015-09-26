@@ -14,7 +14,7 @@ angular.module('hipslackApp')
     self.openedItems = [];
     this.open = function(room, callback) {
       var historyUri = config.backend + '/v2/room/' + room.id + '/history?auth_token=' + config.authkey;
-      if (self._openedIds.indexOf(room.id) == -1) {
+      if (self._openedIds.indexOf(room.id) === -1) {
         self._openedIds.push(room.id);
         self.openedItems.push(room);
       }
@@ -26,7 +26,7 @@ angular.module('hipslackApp')
     };
     this.close = function(room) {
       var index = self._openedIds.indexOf(room.id);
-      if (index == -1) {
+      if (index === -1) {
         return;
       }
       self._openedIds.splice(index, 1);

@@ -8,13 +8,13 @@
  * Service in the hipslackApp.
  */
 angular.module('hipslackApp')
-  .service('Messages', function ($rootScope) {
+  .service('Messages', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var self = this;
     this.messages = [];
     this.set = function(messages, callback) {
       var items = [];
-      messages.forEach(function(val, index) {
+      messages.forEach(function(val) {
         var date = self._formatDate(val.date);
         items.push({ 
           from: val.from.name ? val.from.name : val.from, 

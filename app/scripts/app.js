@@ -16,4 +16,4 @@ angular
   .constant('config', {
     'backend': 'https://api.hipchat.com',
     'authkey': 'xxx'
-  })
+  });
