@@ -40,6 +40,24 @@ ul {
 
 #main-content {
   margin-left: 230px;
+  padding: 0 5px;
+}
+
+#opened-rooms {
+  .active {
+    background-color: #bbb;
+  }
+  
+  .row .room {
+    padding: 5px 0;
+    border-bottom: solid 1px grey;
+  }
+}
+
+#messages {
+  .row {
+    margin: 0 5px;
+  }
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */

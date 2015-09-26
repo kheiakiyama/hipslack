@@ -1,10 +1,10 @@
-<ul ng-repeat="message in messages">
-  <li class="row">
+<ul>
+  <li ng-repeat="message in messages" class="row">
     <div>
       <span>{{message.from}}</span>
       <span>{{message.date}}</span>
       <div ng-bind-html="message.message"></div>
     </div>
+    <hr/>
   </li>
-  <hr/>
 </ul>

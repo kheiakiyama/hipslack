@@ -1,9 +1,8 @@
-<ul ng-repeat="room in openedRooms">
-  <li class="row">
-    <div ng-click="openRoom(room)">
+<ul id="opened-rooms">
+  <li ng-repeat="room in openedRooms" class="row" ng-class="{active: room.active}">
+    <div ng-click="openRoom(room)" class="room">
       <span>{{room.name}}</span>
       <span ng-click="closeRoom(room)">x</span>
     </div>
   </li>
-  <hr/>
 </ul>
