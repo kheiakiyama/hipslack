@@ -23,7 +23,7 @@ angular.module('hipslackApp')
         });
       });
       this.messages = items;
-      callback.call(this, this.messages);
+      callback.call(this);
     };
     this._formatDate = function(date) {
       var tmp = new Date(date);
