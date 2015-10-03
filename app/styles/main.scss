@@ -105,6 +105,10 @@ $content-margin: 15px;
   
   .room {
     padding: 5px 30px;
+    
+    .close {
+      float: right;
+    }
   }
 }
 
