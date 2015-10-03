@@ -50,8 +50,20 @@ ul {
   }  
 }
 
-#col-rooms {
+#col-rooms {    
   width: 230px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: #4D394B;
+  color: #ab9ba9;
+  font-size: 15px;
+  padding-top: 15px;
+  
+  .title {
+    font-size: 17px;
+    margin: 0 15px;
+  }
 }
 
 #main-content {
@@ -66,13 +78,14 @@ ul {
 }
 
 #opened-rooms {
+ 
   .active {
-    background-color: #bbb;
+    background-color: #4c9689;
+    color: #fff;
   }
   
   .room {
-    padding: 5px 0;
-    border-bottom: solid 1px grey;
+    padding: 5px 30px;
   }
 }
 

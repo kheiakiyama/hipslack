@@ -22,14 +22,14 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-controller="MainCtrl">
-      <div id="col-rooms" class="float-left">
+    <div ng-controller="MainCtrl">
+      <div id="col-rooms">
         <div id="rooms">
-          <div ng-click="roomsClick()">Rooms</div>
-          <div id="opned-rooms" data-ng-include="'views/opened-rooms.html'"></div>
+          <div ng-click="roomsClick()" class="title">Rooms</div>
+          <div id="opened-rooms" data-ng-include="'views/opened-rooms.html'"></div>
         </div>
         <div id="direct-messages">
-          <div ng-click="menbersClick()">Menbers</div>
+          <div ng-click="menbersClick()" class="title">Menbers</div>
           <div id="opned-menbers" data-ng-include="'views/opened-menbers.html'"></div>
         </div>
       </div>
