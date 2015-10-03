@@ -27,6 +27,7 @@ angular.module('hipslackApp')
       Rooms.open(room, function() {
         $scope.messages = Messages.messages;
         $scope.openedRooms = Rooms.openedItems;
+        $scope.activeRoomProperty = Rooms.activeRoomProperty;
       });
     };
     $scope.closeRoom = function(room) {
