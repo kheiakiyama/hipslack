@@ -43,19 +43,25 @@ ul {
   padding: 0 5px;
 }
 
+#rooms{
+  .room {
+    
+  }
+}
+
 #opened-rooms {
   .active {
     background-color: #bbb;
   }
   
-  .row .room {
+  .room {
     padding: 5px 0;
     border-bottom: solid 1px grey;
   }
 }
 
 #messages {
-  .row {
+  .item {
     margin: 0 5px;
   }
 }

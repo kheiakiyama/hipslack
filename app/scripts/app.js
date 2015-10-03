@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('hipslackApp', ['hipslackApp.config', 'ngSanitize']);
+  .module('hipslackApp', ['hipslackApp.config', 'ngSanitize', 'ui.bootstrap']);
 
 angular
   .module('hipslackApp.config', [])
