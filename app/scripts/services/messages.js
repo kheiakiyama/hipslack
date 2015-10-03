@@ -32,6 +32,6 @@ angular.module('hipslackApp')
       return ('00' + hours).slice(-2) + ':' + ('00' + minutes).slice(-2);
     };
     this._formatMessage = function(message) {
-      return message;
+      return message.replace(/[\n\r]/g, "<br>");
     };
   });
