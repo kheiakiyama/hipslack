@@ -10,13 +10,12 @@
 angular.module('hipslackApp')
   .service('Rooms', function (config, $http, $rootScope, Messages) {
     var self = this;
-    self._activeIndex = -1;
     self._openedIds = [];
     self.openedItems = [];
     this.open = function(room, callback) {
       self._getMessages(room, callback);
       self._getRoomProperty(room, callback);
-      self._setActive(room);
+      self.setActive(room);
     };
     this.close = function(room) {
       var index = self._openedIds.indexOf(room.id);
@@ -45,15 +44,16 @@ angular.module('hipslackApp')
         callback(this);
       });
     };
-    this._setActive = function(room) {
+    this.setActive = function(room) {
+      self.openedItems.forEach(function(element) {
+        element.active = false;
+      });
+      if (room === null)
+        return;
       var index = self._openedIds.indexOf(room.id);
       if (index === -1) {
         return;
       }
-      self.openedItems.forEach(function(element) {
-        element.active = false;
-      });
-      self._activeIndex = index;
       self.openedItems[index].active = true;
     };
   });

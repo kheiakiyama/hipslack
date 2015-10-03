@@ -1,9 +1,9 @@
 <h3>
-  Select Room
+  Select Member
   <button type="button" class="glyphicon glyphicon-remove close" ng-click="closeClick()"></button>  
 </h3>
 <ul class="content">
-  <li ng-repeat="room in rooms" class="room">
-    <div ng-click="roomClick(room)">{{room.name}}</div>
+  <li ng-repeat="member in members" class="member">
+    <div ng-click="memberClick(member)">{{member.name}}</div>
   </li>
 </ul>

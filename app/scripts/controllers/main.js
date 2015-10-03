@@ -8,7 +8,7 @@
  * Controller of the hipslackApp
  */
 angular.module('hipslackApp')
-  .controller('MainCtrl', function ($scope, $http, $modal, Messages, Rooms) {
+  .controller('MainCtrl', function ($scope, $http, $modal, Messages, Rooms, Members) {
     $scope.openedRooms = [];
     $scope.roomsClick = function() {
       var roomsModal = $modal.open({
@@ -18,17 +18,44 @@ angular.module('hipslackApp')
         controller: 'RoomsModalCtrl'
       });
       roomsModal.result.then(function (selectedItem){
-        $scope.openRoom(selectedItem);
+        $scope._openRoom(selectedItem);
       });
-    };    
-    $scope.menbersClick = function() {
     };
-    $scope.openRoom = function(room) {
+    $scope.roomClick = function(room) {
+      $scope._openRoom(room);
+    };
+    $scope._openRoom = function(room) {
       Rooms.open(room, function() {
-        $scope.messages = Messages.messages;
-        $scope.openedRooms = Rooms.openedItems;
+        Members.setActive(null);
         $scope.activeRoomProperty = Rooms.activeRoomProperty;
+        $scope._update();
       });
+    };
+    $scope.membersClick = function() {
+      var directMessagesModal = $modal.open({
+        animation: true,
+        size: 'lg',
+        templateUrl: 'directMessagesModal.html',
+        controller: 'DirectMessagesModalCtrl'
+      });
+      directMessagesModal.result.then(function (selectedItem){
+        $scope._openMember(selectedItem);
+      });
+    };
+    $scope.memberClick = function(member) {
+      $scope._openMember(member);
+    };
+    $scope._openMember = function(member) {
+      Members.open(member, function() {
+        Rooms.setActive(null);
+        $scope.activeRoomProperty = null;
+        $scope._update();
+      });
+    };
+    $scope._update = function() {
+      $scope.messages = Messages.messages;
+      $scope.openedRooms = Rooms.openedItems;
+      $scope.openedMembers = Members.openedItems;
     };
     $scope.closeRoom = function(room) {
       Rooms.close(room);

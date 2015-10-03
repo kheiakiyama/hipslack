@@ -8,8 +8,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -21,6 +21,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+  <script type="text/ng-template" id="directMessagesModal.html">
+    <div id="members" ng-include="'views/members.html'"></div>
+  </script>
     <!-- Add your site or application content here -->
     <div ng-controller="MainCtrl">
       <div id="col-rooms">
@@ -29,18 +32,18 @@
           <div id="opened-rooms" data-ng-include="'views/opened-rooms.html'"></div>
         </div>
         <div id="direct-messages">
-          <div ng-click="menbersClick()" class="title">Menbers</div>
-          <div id="opned-menbers" data-ng-include="'views/opened-menbers.html'"></div>
+          <div ng-click="membersClick()" class="title">Direct Messages</div>
+          <div id="opened-members" data-ng-include="'views/opened-members.html'"></div>
         </div>
       </div>
       <div id="main-content">
         <script type="text/ng-template" id="roomsModal.html">
           <div id="rooms" ng-include="'views/rooms.html'"></div>
         </script>
-        <div ng-include="'views/menbers.html'" ng-controller="MenbersCtrl" ng-if="show_menbers"></div>
+        <div ng-include="'views/members.html'" ng-controller="membersCtrl" ng-if="show_members"></div>
         <div ng-include="'views/messages.html'" id="messages"></div>
       </div>
-      <div id="room-property" ng-include="'views/room-property.html'" >
+      <div id="room-property" ng-include="'views/room-property.html'" ng-if="activeRoomProperty">
       </div>
     </div>
 
@@ -73,9 +76,11 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/rooms.js"></script>
+        <script src="scripts/controllers/rooms-modal.js"></script>
         <script src="scripts/services/messages.js"></script>
         <script src="scripts/services/rooms.js"></script>
+        <script src="scripts/services/members.js"></script>
+        <script src="scripts/controllers/direct-messages-modal.js"></script>
         <!-- endbuild -->
 </body>
 </html>

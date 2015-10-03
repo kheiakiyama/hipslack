@@ -88,7 +88,7 @@ $content-margin: 15px;
   padding-top: $content-margin;
 }
 
-/* inside main-content */
+/* inside modal */
 
 #rooms{
   .room {
@@ -96,14 +96,16 @@ $content-margin: 15px;
   }
 }
 
-#opened-rooms {
+/* inside main-content */
+
+#opened-rooms, #opened-members {
  
   .active {
     background-color: #4c9689;
     color: #fff;
   }
   
-  .room {
+  .item {
     padding: 5px 30px;
     
     .close {
