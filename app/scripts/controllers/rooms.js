@@ -16,4 +16,7 @@ angular.module('hipslackApp')
     $scope.roomClick = function(room) {
       $modalInstance.close(room);
     };
+    $scope.closeClick = function() {
+      $modalInstance.dismiss('cancel');
+    };
   });

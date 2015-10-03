@@ -34,6 +34,22 @@ ul {
   clear: both;
 }
 
+.modal-content {
+  padding: 0 20px;
+  
+  .content {
+    overflow-y: scroll;
+    height: 360px;
+  }
+  .close {
+    font-size: 18px;
+    font-weight: 200;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }  
+}
+
 #col-rooms {
   width: 230px;
 }
@@ -45,7 +61,7 @@ ul {
 
 #rooms{
   .room {
-    
+    margin: 5px 0;
   }
 }
 
