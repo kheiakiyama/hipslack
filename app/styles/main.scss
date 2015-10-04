@@ -114,6 +114,21 @@ $content-margin: 15px;
   }
 }
 
+#room-topic {
+  
+  font-size: 15px;
+  margin-bottom: 15px;
+  
+  .name {
+    font-size: 18px;
+  }
+  
+  .topic {
+    color: grey;
+    margin-left: 15px;
+  }
+}
+
 #messages {
   .item {
     margin: 0 5px;

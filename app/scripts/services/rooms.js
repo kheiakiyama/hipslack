@@ -38,7 +38,7 @@ angular.module('hipslackApp')
       });
     };
     this._getRoomProperty = function(room, callback) {
-      var roomInfoUri = config.backend + '/v2/room/' + room.id + '/participant?auth_token=' + config.authkey;
+      var roomInfoUri = config.backend + '/v2/room/' + room.id + '?auth_token=' + config.authkey;
       $http.get(roomInfoUri).success(function(data) {
         self.activeRoomProperty = data;
         callback(this);

@@ -40,6 +40,10 @@
         </div>
       </div>
       <div id="main-content">
+        <div id="room-topic" ng-if="activeRoomProperty">
+          <span class="name">{{activeRoomProperty.name}}</span>
+          <span class="topic">{{activeRoomProperty.topic}}</span>
+        </div>
         <div ng-include="'views/messages.html'" id="messages"></div>
       </div>
       <div id="room-property" ng-include="'views/room-property.html'" ng-if="activeRoomProperty">
