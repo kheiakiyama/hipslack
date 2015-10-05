@@ -10,6 +10,7 @@
 
 body {
   padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Tahoma, Arial, sans-serif;
 }
 
 ul {
@@ -130,9 +131,34 @@ $content-margin: 15px;
 }
 
 #messages {
+  .date-span {
+    text-align: center;
+
+    hr {
+      margin: 0;
+      position: relative;
+      top: 1.3rem;
+    }
+    .date {
+      background-color: #fff;
+      display: inline-block;
+      padding: 0 1rem;
+      position: relative;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  }
+  
   .item {
-    margin: 0 5px;
+    margin: 0 5px 10px;
     word-wrap: break-word;
+    
+    .name {
+      font-weight: bold;
+    }
+    .date {
+      color: grey;
+    }
   }
 }
 

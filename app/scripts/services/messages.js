@@ -13,12 +13,19 @@ angular.module('hipslackApp')
     var self = this;
     this.messages = [];
     this.set = function(messages, callback) {
-      var items = [];
+      var items = {};
       messages.forEach(function(val) {
-        var date = self._formatDate(val.date);
-        items.push({ 
+        var key = self._getDateKey(val.date);
+        var date = self._getDate(val.date);
+        if (!items[key]) {
+          items[key] = {
+            "date": date,
+            "items": []
+          };
+        }
+        items[key].items.push({ 
           from: val.from.name ? val.from.name : val.from, 
-          date: date, 
+          date: self._formatDate(val.date), 
           message: self._formatMessage(val.message)
         });
       });
@@ -30,6 +37,20 @@ angular.module('hipslackApp')
       var hours = tmp.getHours();
       var minutes = tmp.getMinutes();
       return ('00' + hours).slice(-2) + ':' + ('00' + minutes).slice(-2);
+    };
+    this._getDateKey = function(date) {
+      var tmp = new Date(date);
+      var year = tmp.getYear();
+      var month = tmp.getMonth();
+      var day = tmp.getDay();
+      return ('00' + year).slice(-2) + ('00' + month).slice(-2) + ('00' + day).slice(-2);
+    };
+    this._getDate = function(date) {
+      var tmp = new Date(date);
+      var year = tmp.getFullYear();
+      var month = tmp.getMonth();
+      var day = tmp.getDay();
+      return ('0000' + year).slice(-4) + '/' + ('00' + month).slice(-2) + '/' + ('00' + day).slice(-2);
     };
     this._formatMessage = function(message) {
       return message.replace(/[\n\r]/g, "<br>");

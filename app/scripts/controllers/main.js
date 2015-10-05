@@ -53,7 +53,7 @@ angular.module('hipslackApp')
       });
     };
     $scope._update = function() {
-      $scope.messages = Messages.messages;
+      $scope.groupMessages = Messages.messages;
       $scope.openedRooms = Rooms.openedItems;
       $scope.openedMembers = Members.openedItems;
     };
