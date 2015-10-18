@@ -78,7 +78,7 @@ angular.module('hipslackApp')
       $http({
         method: 'POST',
         url: uri, 
-        data: { message: '$scope.inputText' }, 
+        data: { message: $scope.inputText }, 
         headers: { 'Authorization': 'Bearer ' + config.authkey }
       }).success(function(data) {
         console.log(data);
