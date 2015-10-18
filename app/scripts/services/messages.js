@@ -41,15 +41,15 @@ angular.module('hipslackApp')
     this._getDateKey = function(date) {
       var tmp = new Date(date);
       var year = tmp.getYear();
-      var month = tmp.getMonth();
-      var day = tmp.getDay();
+      var month = tmp.getMonth() + 1;
+      var day = tmp.getDate();
       return ('00' + year).slice(-2) + ('00' + month).slice(-2) + ('00' + day).slice(-2);
     };
     this._getDate = function(date) {
       var tmp = new Date(date);
       var year = tmp.getFullYear();
-      var month = tmp.getMonth();
-      var day = tmp.getDay();
+      var month = tmp.getMonth() + 1;
+      var day = tmp.getDate();
       return ('0000' + year).slice(-4) + '/' + ('00' + month).slice(-2) + '/' + ('00' + day).slice(-2);
     };
     this._formatMessage = function(message) {
