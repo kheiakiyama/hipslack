@@ -77,8 +77,16 @@ angular.module('hipslackApp')
       $scope.openedRooms = Rooms.openedItems;
     };
     $scope.sendMessageClick = function() {
-      var roomId = Rooms.getActiveId();
-      var uri = config.backend + '/v2/room/' + roomId +  '/message';
+      var getUrl = function () {
+        if ($scope.activeRoomProperty) {
+          var roomId = Rooms.getActiveId();
+          return config.backend + '/v2/room/' + roomId +  '/message';
+        } else {
+          var roomId2 = Members.getActiveId();
+          return config.backend + '/v2/user/' + roomId2 +  '/message';
+        }
+      };
+      var uri = getUrl();
       $http({
         method: 'POST',
         url: uri, 

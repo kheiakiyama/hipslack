@@ -48,4 +48,12 @@ angular.module('hipslackApp')
       }
       self.openedItems[index].active = true;
     };
+    this.getActiveId = function() {
+      var id = -1;
+      self.openedItems.forEach(function(element) {
+        if (element.active)
+          id = element.id;
+      });
+      return id;
+    };
   });
