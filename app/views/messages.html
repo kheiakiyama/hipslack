@@ -6,7 +6,7 @@
     </div>
     <ul>
         <li ng-repeat="message in group.items" class="item">
-        <div>
+        <div id="message-{{message.id}}">
           <span class="name">{{message.from}}</span>
           <span class="date">{{message.date}}</span>
           <div ng-bind-html="message.message"></div>

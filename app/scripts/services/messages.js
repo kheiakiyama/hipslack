@@ -23,7 +23,8 @@ angular.module('hipslackApp')
             "items": []
           };
         }
-        items[key].items.push({ 
+        items[key].items.push({
+          id: val.id,
           from: val.from.name ? val.from.name : val.from, 
           date: self._formatDate(val.date), 
           message: self._formatMessage(val.message)
@@ -54,5 +55,15 @@ angular.module('hipslackApp')
     };
     this._formatMessage = function(message) {
       return message.replace(/[\n\r]/g, "<br>");
+    };
+    this.getLast = function() {
+      var lastGroup = null;
+      for (var key in self.messages) {
+        lastGroup = self.messages[key];
+      }
+      if (lastGroup && lastGroup.items.length > 0)
+        return lastGroup.items[lastGroup.items.length - 1];
+      else
+        return null;
     };
   });

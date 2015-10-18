@@ -8,7 +8,7 @@
  * Controller of the hipslackApp
  */
 angular.module('hipslackApp')
-  .controller('MainCtrl', function ($scope, $http, $modal, config, Messages, Rooms, Members) {
+  .controller('MainCtrl', function ($scope, $http, $modal, $location, config, Messages, Rooms, Members) {
     $scope.openedRooms = [];
     $scope._activeMessageParam = null;
     $scope.roomsClick = function() {
@@ -67,6 +67,10 @@ angular.module('hipslackApp')
       $scope.groupMessages = Messages.messages;
       $scope.openedRooms = Rooms.openedItems;
       $scope.openedMembers = Members.openedItems;
+      var last = Messages.getLast();
+      if (last) {
+        $location.hash('message-' + last.id);
+      }
     };
     $scope.closeRoom = function(room) {
       Rooms.close(room);
