@@ -10,6 +10,7 @@
 angular.module('hipslackApp')
   .controller('MainCtrl', function ($scope, $http, $modal, config, Messages, Rooms, Members) {
     $scope.openedRooms = [];
+    $scope._activeMessageParam = null;
     $scope.roomsClick = function() {
       var roomsModal = $modal.open({
         animation: true,
@@ -25,6 +26,7 @@ angular.module('hipslackApp')
       $scope._openRoom(room);
     };
     $scope._openRoom = function(room) {
+      $scope._activeMessageParam = room;
       Rooms.open(room, function() {
         Members.setActive(null);
         $scope.activeRoomProperty = Rooms.activeRoomProperty;
@@ -46,12 +48,21 @@ angular.module('hipslackApp')
       $scope._openMember(member);
     };
     $scope._openMember = function(member) {
+      $scope._activeMessageParam = member;
       Members.open(member, function() {
         Rooms.setActive(null);
         $scope.activeRoomProperty = null;
         $scope._update();
       });
     };
+    $scope._redraw = function() {
+      if ($scope.activeRoomProperty) {
+        $scope._openRoom($scope._activeMessageParam);
+      } else {
+        $scope._openMember($scope._activeMessageParam);
+      }
+      $scope._update();
+    };    
     $scope._update = function() {
       $scope.groupMessages = Messages.messages;
       $scope.openedRooms = Rooms.openedItems;
@@ -72,7 +83,7 @@ angular.module('hipslackApp')
       }).success(function(data) {
         console.log(data);
         $scope.inputText = "";
-        $scope._update();
+        $scope._redraw();
       });
     };
   });
