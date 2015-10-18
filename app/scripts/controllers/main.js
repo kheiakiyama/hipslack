@@ -8,7 +8,7 @@
  * Controller of the hipslackApp
  */
 angular.module('hipslackApp')
-  .controller('MainCtrl', function ($scope, $http, $modal, Messages, Rooms, Members) {
+  .controller('MainCtrl', function ($scope, $http, $modal, config, Messages, Rooms, Members) {
     $scope.openedRooms = [];
     $scope.roomsClick = function() {
       var roomsModal = $modal.open({
@@ -60,5 +60,19 @@ angular.module('hipslackApp')
     $scope.closeRoom = function(room) {
       Rooms.close(room);
       $scope.openedRooms = Rooms.openedItems;
+    };
+    $scope.sendMessageClick = function() {
+      var roomId = Rooms.getActiveId();
+      var uri = config.backend + '/v2/room/' + roomId +  '/message';
+      $http({
+        method: 'POST',
+        url: uri, 
+        data: { message: '$scope.inputText' }, 
+        headers: { 'Authorization': 'Bearer ' + config.authkey }
+      }).success(function(data) {
+        console.log(data);
+        $scope.inputText = "";
+        $scope._update();
+      });
     };
   });

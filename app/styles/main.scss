@@ -162,6 +162,19 @@ $content-margin: 15px;
   }
 }
 
+/* message form */
+#message-form {
+  width: 100%;
+  
+  .message {
+    width: 80%;
+  }
+  
+  .button {
+    
+  }
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

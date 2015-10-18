@@ -44,7 +44,7 @@
           <span class="name">{{activeRoomProperty.name}}</span>
           <span class="topic">{{activeRoomProperty.topic}}</span>
         </div>
-        <div ng-include="'views/messages.html'" id="messages"></div>
+        <div my-include="views/messages.html" id="messages"></div>
       </div>
       <div id="room-property" ng-include="'views/room-property.html'" ng-if="activeRoomProperty">
       </div>
@@ -80,6 +80,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/rooms-modal.js"></script>
+        <script src="scripts/directive/include.js"></script>
         <script src="scripts/services/messages.js"></script>
         <script src="scripts/services/rooms.js"></script>
         <script src="scripts/services/members.js"></script>
