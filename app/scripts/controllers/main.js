@@ -81,9 +81,11 @@ angular.module('hipslackApp')
         data: { message: $scope.inputText }, 
         headers: { 'Authorization': 'Bearer ' + config.authkey }
       }).success(function(data) {
-        console.log(data);
         $scope.inputText = "";
         $scope._redraw();
       });
+    };
+    $scope.messageBoxKeyDown = function() {
+      $scope.sendMessageClick();
     };
   });
