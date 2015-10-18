@@ -38,23 +38,18 @@
           <div ng-click="membersClick()" class="title">Direct Messages</div>
           <div id="opened-members" data-ng-include="'views/opened-members.html'"></div>
         </div>
+        <div id="title">HipSlack</div>
       </div>
       <div id="main-content">
         <div id="room-topic" ng-if="activeRoomProperty">
           <span class="name">{{activeRoomProperty.name}}</span>
           <span class="topic">{{activeRoomProperty.topic}}</span>
         </div>
-        <div my-include="views/messages.html" id="messages"></div>
+        <div my-include="views/messages.html"></div>
       </div>
       <div id="room-property" ng-include="'views/room-property.html'" ng-if="activeRoomProperty">
       </div>
     </div>
-
-    <div class="footer">
-      <div class="container">HipSlack</div>
-    </div>
-
-
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){

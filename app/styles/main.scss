@@ -56,6 +56,8 @@ ul {
 $left-margin: 230px;
 $right-margin: 150px;
 $content-margin: 15px;
+$top-margin: 50px;
+$bottom-margin: 50px;
 
 #col-rooms {
   width: $left-margin;
@@ -97,6 +99,15 @@ $content-margin: 15px;
   }
 }
 
+/* inside col-rooms */
+
+#title {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: #ddd;
+}
+
 /* inside main-content */
 
 #opened-rooms, #opened-members {
@@ -118,7 +129,7 @@ $content-margin: 15px;
 #room-topic {
   
   font-size: 15px;
-  margin-bottom: 15px;
+  position: fixed;
   
   .name {
     font-size: 18px;
@@ -131,6 +142,13 @@ $content-margin: 15px;
 }
 
 #messages {
+  position: fixed;
+  top: $top-margin;
+  bottom: $bottom-margin;
+  left: $left-margin + $content-margin;
+  right: $right-margin + $content-margin;
+  overflow-y: scroll;
+
   .date-span {
     text-align: center;
 
@@ -164,7 +182,10 @@ $content-margin: 15px;
 
 /* message form */
 #message-form {
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: $left-margin + $content-margin;
+  right: $right-margin + $content-margin;
   
   .message {
     width: 80%;
