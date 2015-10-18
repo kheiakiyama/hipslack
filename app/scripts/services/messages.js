@@ -15,6 +15,8 @@ angular.module('hipslackApp')
     this.set = function(messages, callback) {
       var items = {};
       messages.forEach(function(val) {
+        if (!val.message)
+          return;
         var key = self._getDateKey(val.date);
         var date = self._getDate(val.date);
         if (!items[key]) {
