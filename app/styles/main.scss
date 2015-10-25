@@ -18,6 +18,15 @@ ul {
   -webkit-padding-start: 0;
 }
 
+a, a:link, a:visited {
+  color:#2a80b9
+}
+
+a:active, a:focus, a:hover {
+  color:#439fe0
+}
+
+
 .float-left {
   float: left;
 }
@@ -176,6 +185,28 @@ $bottom-margin: 50px;
     }
     .date {
       color: grey;
+    }
+  }
+  
+  .card {
+   
+    .quote-bar {
+      background: #e3e4e6;
+      width: 4px;
+      display: table-cell;
+    }
+    
+    .indent-content{
+      padding-left: 9px;
+      display: table-cell;
+    }
+    
+    .site {
+      color: #9e9ea6;
+    }
+    
+    .url {
+      font-weight: 700;
     }
   }
 }

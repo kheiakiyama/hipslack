@@ -5,11 +5,23 @@
       <div class="date">{{group.date}}</div>
     </div>
     <ul>
-        <li ng-repeat="message in group.items" class="item">
+      <li ng-repeat="message in group.items" class="item">
         <div id="message-{{message.id}}">
-          <span class="name">{{message.from}}</span>
-          <span class="date">{{message.date}}</span>
-          <div ng-bind-html="message.message"></div>
+          <div ng-if="message.message">
+            <span class="name">{{message.from}}</span>
+            <span class="date">{{message.date}}</span>
+            <div ng-bind-html="message.message"></div>
+          </div>
+          <div ng-if="message.card" class="card">
+            <div class="quote-bar"></div>
+            <div class="indent-content">
+              <div class="site">{{message.card.site}}</div>
+              <div class="url">
+                <a href="{{message.card.url}}" target="{{message.card.url}}">{{message.card.title}}</a>
+              </div>
+              <div class="description">{{message.card.description}}</div>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
