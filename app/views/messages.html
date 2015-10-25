@@ -12,6 +12,11 @@
             <span class="date">{{message.date}}</span>
             <div ng-bind-html="message.message"></div>
           </div>
+          <div ng-if="message.image">
+            <a href="{{message.image}}" target="{{message.image}}">
+              <img ng-src="{{message.image}}" alt="image">
+            </a>
+          </div>
           <div ng-if="message.card" class="card">
             <div class="quote-bar"></div>
             <div class="indent-content">

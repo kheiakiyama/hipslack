@@ -25,13 +25,7 @@ angular.module('hipslackApp')
             "items": []
           };
         }
-        items[key].items.push({
-          id: val.id,
-          from: val.from.name ? val.from.name : val.from, 
-          date: self._formatDate(val.date), 
-          message: self._formatMessage(val),
-          card: val.card ? JSON.parse(val.card) : null
-        });
+        items[key].items.push(self._parseMessage(val));
       });
       this.messages = items;
       callback.call(this);
@@ -56,12 +50,21 @@ angular.module('hipslackApp')
       var day = tmp.getDate();
       return ('0000' + year).slice(-4) + '/' + ('00' + month).slice(-2) + '/' + ('00' + day).slice(-2);
     };
-    this._formatMessage = function(item) {
-      if (item.card) {
-        return null;
-      } else {
-        return item.message.replace(/[\n\r]/g, "<br>");
+    this._parseMessage = function(item) {
+      var res = {
+        id: item.id,
+        from: item.from.name ? item.from.name : item.from, 
+        date: self._formatDate(item.date), 
+        image: item.message.match(/^(http|ftp):\/\/.+(jpg|png|bmp)$/) ? item.message : null,
+        card: item.card ? JSON.parse(item.card) : null
+      };
+      if (!res.image && !res.card) {
+        res.message = self._formatMessage(item)
       }
+      return res;
+    };
+    this._formatMessage = function(item) {
+      return item.message.replace(/[\n\r]/g, "<br>");
     };
     this.getLast = function() {
       var lastGroup = null;
