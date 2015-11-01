@@ -8,7 +8,7 @@
  * Service in the hipslackApp.
  */
 angular.module('hipslackApp')
-  .service('Messages', function () {
+  .service('Messages', function ($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var self = this;
     this.messages = [];
@@ -58,8 +58,17 @@ angular.module('hipslackApp')
         image: item.message.match(/^(http|ftp):\/\/.+(jpg|png|bmp)$/) ? item.message : null,
         card: item.card ? JSON.parse(item.card) : null
       };
-      if (!res.image && !res.card) {
-        res.message = self._formatMessage(item)
+      if (res.image){
+        $http({
+          method: 'HEAD',
+          url: res.image,
+        }).then(null, function(data) {
+          res.message = "*** Can Not Get Image from " + res.image + " ***";
+          res.image = null;
+        });
+      }
+      if (!res.image && !res.card && !res.message) {
+        res.message = self._formatMessage(item);
       }
       return res;
     };
