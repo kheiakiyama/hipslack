@@ -18,7 +18,73 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.loadUrl('file://' + __dirname + '/dist/index.html');
 
+  installMenu();
+  
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
 });
+
+function installMenu() {
+  var menu = null;
+  var Menu = require('menu');
+  if(process.platform == 'darwin') {
+    menu = Menu.buildFromTemplate([
+      {
+        label: 'Electron',
+        submenu: [
+          {
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            click: function() { app.quit(); }
+          },
+        ]
+      },
+      {
+        label: 'View',
+        submenu: [
+          {
+            label: 'Reload',
+            accelerator: 'Command+R',
+            click: function() { mainWindow.restart(); }
+          },
+          {
+            label: 'Toggle Full Screen',
+            accelerator: 'Ctrl+Command+F',
+            click: function() { mainWindow.setFullScreen(!mainWindow.isFullScreen()); }
+          },
+          {
+            label: 'Toggle Developer Tools',
+            accelerator: 'Alt+Command+I',
+            click: function() { mainWindow.toggleDevTools(); }
+          },
+        ]
+      }
+    ]);
+    Menu.setApplicationMenu(menu);
+  } else {
+    menu = Menu.buildFromTemplate([
+      {
+        label: '&View',
+        submenu: [
+          {
+            label: '&Reload',
+            accelerator: 'Ctrl+R',
+            click: function() { mainWindow.restart(); }
+          },
+          {
+            label: 'Toggle &Full Screen',
+            accelerator: 'F11',
+            click: function() { mainWindow.setFullScreen(!mainWindow.isFullScreen()); }
+          },
+          {
+            label: 'Toggle &Developer Tools',
+            accelerator: 'Alt+Ctrl+I',
+            click: function() { mainWindow.toggleDevTools(); }
+          },
+        ]
+      }
+    ]);
+    mainWindow.setMenu(menu);
+  }
+}
