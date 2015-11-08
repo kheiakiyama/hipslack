@@ -10,7 +10,12 @@
     "gulp-uglify": "^1.4.2",
     "gulp-load-plugins": "^1.1.0",
     "gulp-sass": "^2.1.0",
-    "electron-connect": "^0.3.3"
+    "electron-connect": "^0.3.3",
+    "electron-packager": "^5.1.1",
+    "gulp-useref": "^2.1.0",
+    "main-bower-files": "^2.9.0",
+    "gulp-if": "^2.0.0",
+    "del": "^2.0.2"
   },
   "engines": {
     "node": ">=0.10.0"

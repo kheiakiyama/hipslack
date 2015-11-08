@@ -16,7 +16,7 @@ app.on('ready', function() {
 
   // ブラウザ(Chromium)の起動, 初期画面のロード
   mainWindow = new BrowserWindow({width: 800, height: 600});
-  mainWindow.loadUrl('file://' + __dirname + '/dist/index.html');
+  mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   installMenu();
   
