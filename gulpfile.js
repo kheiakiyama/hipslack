@@ -18,10 +18,24 @@ gulp.task('js', function () {
     .pipe(gulp.dest('dist/scripts'));
 });
 
-gulp.task('build', ['html', 'js'], function () {
+gulp.task('css', function () {
+  return gulp.src('app/styles/*.scss')
+    .pipe($.plumber())
+    .pipe($.sass())
+    .pipe($.concat('main.css'))
+    .pipe(gulp.dest('dist/styles'));
+});
+
+gulp.task('build', ['html', 'js', 'css'], function () {
   console.log('build finished!');
 });
 
-gulp.task('default', function () {
-  gulp.start('build');
+gulp.task('watch', function() {
+  gulp.watch(['app/scripts/**/*.js'], ['js']);
+  gulp.watch(['app/styles/*.scss'], ['css']);
+  gulp.watch(['app/*.html', 'app/views/*.html'], ['html']);
+  gulp.watch('gulpfile.js', ['build']);
+});
+
+gulp.task('default', ['build', 'watch'], function () {
 });
