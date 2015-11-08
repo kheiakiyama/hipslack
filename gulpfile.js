@@ -32,7 +32,7 @@ gulp.task('js', function () {
   return gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
     .pipe($.plumber())
     .pipe($.concat('main.js'))
-//    .pipe($.uglify('main.js'))
+    .pipe($.uglify({ mangle: false }))
     .pipe(gulp.dest(distDir + '/scripts'));
 });
 
