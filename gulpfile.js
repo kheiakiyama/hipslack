@@ -57,6 +57,8 @@ gulp.task('css', function () {
 gulp.task('vendor', function () {
   gulp.src('bower_components/jquery/dist/jquery.min.js')
     .pipe(gulp.dest(distDir));
+  gulp.src('bower_components/bootstrap/dist/fonts/*')
+    .pipe(gulp.dest(distDir + '/fonts'));
   return gulp.src(mainBowerFiles({
       overrides: {
         bootstrap: {
@@ -75,7 +77,7 @@ gulp.task('vendor', function () {
       ,$.concat('vendor.css')
       ,$.concat('vendor.js')
     ))
-    .pipe(gulp.dest(distDir));
+    .pipe(gulp.dest(distDir + '/vendor'));
 });
 
 gulp.task('build', ['html', 'js', 'css', 'app', 'vendor'], function () {
