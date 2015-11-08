@@ -13,7 +13,6 @@ var serveDir = '.serve';
 var releaseDir = 'release';
 
 gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: ['../bower_components']});
   gulp.src('app/*.html')
     .pipe(gulp.dest(serveDir))
     .pipe($.useref())
@@ -33,7 +32,7 @@ gulp.task('js', function () {
   return gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
     .pipe($.plumber())
     .pipe($.concat('main.js'))
-    .pipe($.uglify('main.js'))
+//    .pipe($.uglify('main.js'))
     .pipe(gulp.dest(distDir + '/scripts'));
 });
 
@@ -56,7 +55,18 @@ gulp.task('css', function () {
 });
 
 gulp.task('vendor', function () {
-  return gulp.src(mainBowerFiles())
+  gulp.src('bower_components/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest(distDir));
+  return gulp.src(mainBowerFiles({
+      overrides: {
+        bootstrap: {
+          main: [
+            './dist/js/bootstrap.js',
+            './dist/css/*.min.*',
+          ]
+        }
+      }
+    }))
     .pipe(gulp.dest(serveDir + '/vendor'))
     .pipe($.plumber())
     .pipe($.if(function(file){
