@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var electron = require('electron-connect').server.create();
 var $ = require('gulp-load-plugins')();
 
 gulp.task('html', function () {
@@ -11,7 +12,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('js', function () {
-  return gulp.src('app/scripts/**/*.js')
+  return gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
     .pipe($.plumber())
     .pipe($.concat('main.js'))
     .pipe($.uglify('main.js'))
@@ -27,11 +28,18 @@ gulp.task('css', function () {
 });
 
 gulp.task('build', ['html', 'js', 'css'], function () {
-  console.log('build finished!');
+  return console.log('build finished!');
+});
+
+gulp.task('serve', ['build', 'watch'], function () {
+  electron.start();
+  
+  gulp.watch(['dist/scripts/*.js'], electron.restart);
+  gulp.watch(['dist/**/*.html', 'dist/styles/*.css'], electron.reload);
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['app/scripts/**/*.js'], ['js']);
+  gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['js']);
   gulp.watch(['app/styles/*.scss'], ['css']);
   gulp.watch(['app/*.html', 'app/views/*.html'], ['html']);
   gulp.watch('gulpfile.js', ['build']);
