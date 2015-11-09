@@ -94,7 +94,7 @@ gulp.task('serve', ['build', 'watch'], function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['app/scripts/*.js', 'app/scripts/**/*.js'], ['js']);
+  gulp.watch(['main.js', 'app/scripts/*.js', 'app/scripts/**/*.js'], ['js']);
   gulp.watch(['app/styles/*.scss'], ['css']);
   gulp.watch(['app/*.html', 'app/views/*.html'], ['html']);
   gulp.watch('gulpfile.js', ['build']);
