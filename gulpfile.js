@@ -26,6 +26,10 @@ gulp.task('js', function () {
   gulp.src('main.js')
     .pipe(gulp.dest(serveDir))
     .pipe(gulp.dest(distDir));
+  gulp.src(['app/lib/*.js'])
+    .pipe($.plumber())
+    .pipe(gulp.dest(serveDir + '/lib'))
+    .pipe(gulp.dest(distDir + '/lib'));
   gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
     .pipe($.plumber())
     .pipe(gulp.dest(serveDir + '/scripts'));
