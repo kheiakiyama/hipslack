@@ -1,5 +1,5 @@
 {
-  "name": "hipslack",
+  "name": "HipSlack",
   "version": "0.0.1",
   "description": "hipchat's ui like slack",
   "main": "index.html",
