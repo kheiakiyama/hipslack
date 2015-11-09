@@ -2,6 +2,8 @@
 
 var app = require('app');
 var BrowserWindow = require('browser-window');
+var dialog = require('dialog');
+var conf = require('./lib/config');
 
 require('crash-reporter').start();
 
@@ -13,6 +15,16 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
+
+  if (conf.getConfig() === null) {
+    dialog.showMessageBox({ 
+      title: 'info' ,
+      message: 'config file is not found',
+      detail: 'about config file: https://github.com/kheiakiyama/hipslack',
+      buttons: [ 'OK' ]
+    });
+    app.quit();
+  }
 
   // ブラウザ(Chromium)の起動, 初期画面のロード
   mainWindow = new BrowserWindow({width: 800, height: 600});
