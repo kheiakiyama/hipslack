@@ -6,13 +6,8 @@ version 0.12.1.
 
 ## Build 
 
-- Run `grunt build`
-- `electron-packager dist hipslack --platform=darwin,win32 --arch=x64 --version=0.30.0`
+- Run `gulp package`
 
 ## development
 
-- Run `grunt serve` for preview.
-
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
+- Run `gulp serve` for preview.
