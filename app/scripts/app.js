@@ -11,9 +11,14 @@
 var app = angular
   .module('hipslackApp', ['hipslackApp.config', 'ngSanitize', 'ui.bootstrap']);
 
+var remote = require('remote');
+var config = remote.require('./lib/config');
+
+var setting = config.getConfig();
+
 angular
   .module('hipslackApp.config', [])
   .constant('config', {
     'backend': 'https://api.hipchat.com',
-    'authkey': 'xxx'
+    'authkey': setting.key
   });
