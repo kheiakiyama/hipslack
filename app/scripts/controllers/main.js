@@ -10,6 +10,7 @@
 angular.module('hipslackApp')
   .controller('MainCtrl', function ($scope, $http, $modal, $location, config, Messages, Rooms, Members) {
     $scope.openedRooms = [];
+    $scope.isLoading = false;
     $scope._activeMessageParam = null;
     $scope.roomsClick = function() {
       var roomsModal = $modal.open({
@@ -26,6 +27,7 @@ angular.module('hipslackApp')
       $scope._openRoom(room);
     };
     $scope._openRoom = function(room) {
+      $scope.isLoading = true;
       $scope._activeMessageParam = room;
       Rooms.open(room, function() {
         Members.setActive(null);
@@ -48,6 +50,7 @@ angular.module('hipslackApp')
       $scope._openMember(member);
     };
     $scope._openMember = function(member) {
+      $scope.isLoading = true;
       $scope._activeMessageParam = member;
       Members.open(member, function() {
         Rooms.setActive(null);
@@ -71,6 +74,7 @@ angular.module('hipslackApp')
       if (last) {
         $location.hash('message-' + last.id);
       }
+      $scope.isLoading = false;
     };
     $scope.closeRoom = function(room) {
       Rooms.close(room);
