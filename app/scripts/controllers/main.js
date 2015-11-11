@@ -59,12 +59,13 @@ angular.module('hipslackApp')
       });
     };
     $scope._redraw = function() {
+      if ($scope._activeMessageParam === null)
+        return;
       if ($scope.activeRoomProperty) {
         $scope._openRoom($scope._activeMessageParam);
       } else {
         $scope._openMember($scope._activeMessageParam);
       }
-      $scope._update();
     };    
     $scope._update = function() {
       $scope.groupMessages = Messages.messages;
@@ -104,4 +105,9 @@ angular.module('hipslackApp')
     $scope.messageBoxKeyDown = function() {
       $scope.sendMessageClick();
     };
+    $scope._redrawHookEvent = function() {
+      $scope._redraw();
+      setTimeout($scope._redrawHookEvent, 30000);
+    };
+    $scope._redrawHookEvent();
   });
