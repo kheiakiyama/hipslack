@@ -8,7 +8,7 @@
  * Service in the hipslackApp.
  */
 angular.module('hipslackApp')
-  .service('Messages', function ($http) {
+  .service('Messages', function ($http, $sce) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var self = this;
     this.messages = [];
@@ -73,7 +73,14 @@ angular.module('hipslackApp')
       return res;
     };
     this._formatMessage = function(item) {
-      return item.message.replace(/[\n\r]/g, "<br>");
+      var message = item.message;
+      var res = {};
+      message = message.replace(/(<a[^>]* href="([^"]*)">)/g, function(src, tag, url) {
+        res.url = url;
+        return '<a href="' + url + '" target="' + url + '" onclick="return false;" ng-click="linkClick(message.message.url)">';
+      });
+      res.html = message.replace(/[\n\r]/g, "<br>");
+      return res;
     };
     this.getLast = function() {
       var lastGroup = null;

@@ -10,7 +10,7 @@ var shell = require('shell');
  * Controller of the hipslackApp
  */
 angular.module('hipslackApp')
-  .controller('MainCtrl', function ($scope, $http, $modal, $location, config, Messages, Rooms, Members) {
+  .controller('MainCtrl', function ($scope, $http, $modal, $location, $sce, config, Messages, Rooms, Members) {
     $scope.openedRooms = [];
     $scope.isLoading = false;
     $scope._activeMessageParam = null;
@@ -111,6 +111,9 @@ angular.module('hipslackApp')
       shell.openExternal(url);
       return false;
     };
+    $scope.to_trusted = function(html_code) {
+      return $sce.trustAsHtml(html_code);
+    },
     $scope._redrawHookEvent = function() {
       $scope._redraw();
       setTimeout($scope._redrawHookEvent, 30000);
