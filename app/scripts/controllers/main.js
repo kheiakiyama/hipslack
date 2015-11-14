@@ -1,5 +1,7 @@
 'use strict';
 
+var shell = require('shell');
+
 /**
  * @ngdoc function
  * @name hipslackApp.controller:MainCtrl
@@ -104,6 +106,10 @@ angular.module('hipslackApp')
     };
     $scope.messageBoxKeyDown = function() {
       $scope.sendMessageClick();
+    };
+    $scope.linkClick = function(url) {
+      shell.openExternal(url);
+      return false;
     };
     $scope._redrawHookEvent = function() {
       $scope._redraw();
