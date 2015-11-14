@@ -9,14 +9,7 @@
 angular.module('hipslackApp')
   .directive('myCompile', function ($compile) {
     return function (scope, element, attrs) {
-      scope.$watch(
-        function(scope) {
-          return scope.$eval(attrs.myCompile);
-        },
-        function(value) {
-          element.html(value);
-          $compile(element.contents())(scope);
-        }
-      );
+      element.html(scope.$eval(attrs.myCompile));
+      $compile(element.contents())(scope);
     };
   });
