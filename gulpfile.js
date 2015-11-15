@@ -8,16 +8,17 @@ var packager = require('electron-packager');
 var pkg = require('./package.json');
 var del = require('del');
 
+var appDir = 'app/' + '';
 var distDir = 'dist';
 var serveDir = '.serve';
 var releaseDir = 'release';
 
 gulp.task('html', function () {
-  gulp.src('app/*.html')
+  gulp.src(appDir + '/*.html')
     .pipe(gulp.dest(serveDir))
     .pipe($.useref())
     .pipe(gulp.dest(distDir));
-  return gulp.src('app/views/*.html')
+  return gulp.src(appDir + '/views/*.html')
     .pipe(gulp.dest(serveDir + '/views'))
     .pipe(gulp.dest(distDir + '/views'));
 });
@@ -26,14 +27,14 @@ gulp.task('js', function () {
   gulp.src('main.js')
     .pipe(gulp.dest(serveDir))
     .pipe(gulp.dest(distDir));
-  gulp.src(['app/lib/*.js'])
+  gulp.src([appDir + '/lib/*.js'])
     .pipe($.plumber())
     .pipe(gulp.dest(serveDir + '/lib'))
     .pipe(gulp.dest(distDir + '/lib'));
-  gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
+  gulp.src([appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'])
     .pipe($.plumber())
     .pipe(gulp.dest(serveDir + '/scripts'));
-  return gulp.src(['app/scripts/*.js', 'app/scripts/**/*.js'])
+  return gulp.src([appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'])
     .pipe($.plumber())
     .pipe($.concat('main.js'))
     .pipe($.uglify({ mangle: false }))
@@ -47,11 +48,11 @@ gulp.task('app', function () {
 });
 
 gulp.task('css', function () {
-  gulp.src('app/styles/*.scss')
+  gulp.src(appDir + '/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sass())
     .pipe(gulp.dest(serveDir + '/styles'));
-  return gulp.src('app/styles/*.scss')
+  return gulp.src(appDir + '/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sass())
     .pipe($.concat('main.css'))
@@ -98,9 +99,9 @@ gulp.task('serve', ['build', 'watch'], function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['main.js', 'app/scripts/*.js', 'app/scripts/**/*.js'], ['js']);
-  gulp.watch(['app/styles/*.scss'], ['css']);
-  gulp.watch(['app/*.html', 'app/views/*.html'], ['html']);
+  gulp.watch(['main.js', appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'], ['js']);
+  gulp.watch([appDir + '/styles/*.scss'], ['css']);
+  gulp.watch([appDir + '/*.html', appDir + '/views/*.html'], ['html']);
   gulp.watch('gulpfile.js', ['build']);
 });
 
