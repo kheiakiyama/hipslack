@@ -10,7 +10,7 @@
           <div ng-if="message.message">
             <span class="name">{{message.from}}</span>
             <span class="date">{{message.date}}</span>
-            <div my-compile="to_trusted(message.message.html)"></div>
+            <div my-compile="toTrusted(message.message.html)"></div>
           </div>
           <div ng-if="message.image">
             <a href="{{message.image}}" target="{{message.image}}">

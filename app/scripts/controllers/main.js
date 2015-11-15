@@ -111,7 +111,7 @@ angular.module('hipslackApp')
       shell.openExternal(url);
       return false;
     };
-    $scope.to_trusted = function(html_code) {
+    $scope.toTrusted = function(html_code) {
       return $sce.trustAsHtml(html_code);
     },
     $scope._redrawHookEvent = function() {
