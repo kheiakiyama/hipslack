@@ -131,7 +131,9 @@ gulp.task('package', ['win32', 'darwin'].map(function (platform) {
 
 gulp.task('scss-lint', function() {
   return gulp.src(appDir + '/**/*.scss')
-    .pipe($.scssLint());
+    .pipe($.scssLint({
+      'config': './scss-lint.yml',
+    }));
 });
 
 gulp.task('lint', ['scss-lint'], function() {
