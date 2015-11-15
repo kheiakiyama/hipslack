@@ -129,6 +129,12 @@ gulp.task('package', ['win32', 'darwin'].map(function (platform) {
   return taskName;
 }));
 
+gulp.task('js-hint', function() {
+  return gulp.src(appDir + '/**/*.js')
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('default'));
+});
+
 gulp.task('scss-lint', function() {
   return gulp.src(appDir + '/**/*.scss')
     .pipe($.scssLint({
@@ -136,7 +142,7 @@ gulp.task('scss-lint', function() {
     }));
 });
 
-gulp.task('lint', ['scss-lint'], function() {
+gulp.task('lint', ['js-hint', 'scss-lint'], function() {
 });
 
 gulp.task('default', ['build', 'watch'], function () {
