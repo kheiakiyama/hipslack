@@ -129,5 +129,13 @@ gulp.task('package', ['win32', 'darwin'].map(function (platform) {
   return taskName;
 }));
 
+gulp.task('scss-lint', function() {
+  return gulp.src(appDir + '/**/*.scss')
+    .pipe($.scssLint());
+});
+
+gulp.task('lint', ['scss-lint'], function() {
+});
+
 gulp.task('default', ['build', 'watch'], function () {
 });
