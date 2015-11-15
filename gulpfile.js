@@ -85,7 +85,7 @@ gulp.task('vendor', function () {
     .pipe(gulp.dest(distDir + '/vendor'));
 });
 
-gulp.task('build', ['html', 'js', 'css', 'app', 'vendor'], function () {
+gulp.task('build', ['html', 'js', 'css', 'app', 'vendor', 'lint'], function () {
   return console.log('build finished!');
 });
 
@@ -99,8 +99,8 @@ gulp.task('serve', ['build', 'watch'], function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['main.js', appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'], ['js']);
-  gulp.watch([appDir + '/styles/*.scss'], ['css']);
+  gulp.watch(['main.js', appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'], ['js', 'js-hint']);
+  gulp.watch([appDir + '/styles/*.scss'], ['css', 'scss-lint']);
   gulp.watch([appDir + '/*.html', appDir + '/views/*.html'], ['html']);
   gulp.watch('gulpfile.js', ['build']);
 });
