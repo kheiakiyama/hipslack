@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var app = angular
+angular
   .module('hipslackApp', ['hipslackApp.config', 'ngSanitize', 'ui.bootstrap']);
 
 var remote = require('remote');

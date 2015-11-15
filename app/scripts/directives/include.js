@@ -12,6 +12,6 @@ angular.module('hipslackApp')
       $http.get(attr.myInclude).success(function(response) {
         element.html(response);
         $compile(element.contents())(scope);
-      })
+      });
     };
 });

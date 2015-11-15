@@ -8,15 +8,16 @@
  * Service in the hipslackApp.
  */
 angular.module('hipslackApp')
-  .service('Messages', function ($http, $sce) {
+  .service('Messages', function ($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var self = this;
     this.messages = [];
     this.set = function(messages, callback) {
       var items = {};
       messages.forEach(function(val) {
-        if (!val.message)
+        if (!val.message) {
           return;
+        }
         var key = self._getDateKey(val.date);
         var date = self._getDate(val.date);
         if (!items[key]) {
@@ -62,7 +63,7 @@ angular.module('hipslackApp')
         $http({
           method: 'HEAD',
           url: res.image,
-        }).then(null, function(data) {
+        }).then(null, function() {
           res.message = "*** Can Not Get Image from " + res.image + " ***";
           res.image = null;
         });
@@ -87,9 +88,10 @@ angular.module('hipslackApp')
       for (var key in self.messages) {
         lastGroup = self.messages[key];
       }
-      if (lastGroup && lastGroup.items.length > 0)
+      if (lastGroup && lastGroup.items.length > 0) {
         return lastGroup.items[lastGroup.items.length - 1];
-      else
+      } else {
         return null;
+      }
     };
   });

@@ -40,8 +40,9 @@ angular.module('hipslackApp')
       self.openedItems.forEach(function(element) {
         element.active = false;
       });
-      if (member === null)
+      if (member === null) {
         return;
+      }
       var index = self._openedIds.indexOf(member.id);
       if (index === -1) {
         return;
@@ -51,8 +52,9 @@ angular.module('hipslackApp')
     this.getActiveId = function() {
       var id = -1;
       self.openedItems.forEach(function(element) {
-        if (element.active)
+        if (element.active) {
           id = element.id;
+        }
       });
       return id;
     };

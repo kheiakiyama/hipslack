@@ -61,8 +61,9 @@ angular.module('hipslackApp')
       });
     };
     $scope._redraw = function() {
-      if ($scope._activeMessageParam === null)
+      if ($scope._activeMessageParam === null) {
         return;
+      }
       if ($scope.activeRoomProperty) {
         $scope._openRoom($scope._activeMessageParam);
       } else {
@@ -99,7 +100,7 @@ angular.module('hipslackApp')
         url: uri, 
         data: { message: $scope.inputText }, 
         headers: { 'Authorization': 'Bearer ' + config.authkey }
-      }).success(function(data) {
+      }).success(function() {
         $scope.inputText = "";
         $scope._redraw();
       });
@@ -111,8 +112,8 @@ angular.module('hipslackApp')
       shell.openExternal(url);
       return false;
     };
-    $scope.toTrusted = function(html_code) {
-      return $sce.trustAsHtml(html_code);
+    $scope.toTrusted = function(htmlCode) {
+      return $sce.trustAsHtml(htmlCode);
     },
     $scope._redrawHookEvent = function() {
       $scope._redraw();
