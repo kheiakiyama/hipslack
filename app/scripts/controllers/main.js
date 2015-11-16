@@ -1,6 +1,8 @@
 'use strict';
 
 var shell = require('shell');
+var remote = require('remote');
+var appConfig = remote.require('./lib/app-config');
 
 /**
  * @ngdoc function
@@ -22,19 +24,24 @@ angular.module('hipslackApp')
         controller: 'RoomsModalCtrl'
       });
       roomsModal.result.then(function (selectedItem){
-        $scope._openRoom(selectedItem);
+        $scope.roomClick(selectedItem);
       });
     };
     $scope.roomClick = function(room) {
-      $scope._openRoom(room);
+      $scope._loadRoom(room, function() {
+        $scope._saveStates();
+      });
     };
-    $scope._openRoom = function(room) {
+    $scope._loadRoom = function(room, callback) {
       $scope.isLoading = true;
       $scope._activeMessageParam = room;
       Rooms.open(room, function() {
         Members.setActive(null);
         $scope.activeRoomProperty = Rooms.activeRoomProperty;
         $scope._update();
+        if (callback !== null) {
+          callback();
+        }
       });
     };
     $scope.membersClick = function() {
@@ -45,19 +52,24 @@ angular.module('hipslackApp')
         controller: 'DirectMessagesModalCtrl'
       });
       directMessagesModal.result.then(function (selectedItem){
-        $scope._openMember(selectedItem);
+        $scope.memberClick(selectedItem);
       });
     };
     $scope.memberClick = function(member) {
-      $scope._openMember(member);
+      $scope._loadMember(member, function() {
+        $scope._saveStates();
+      });
     };
-    $scope._openMember = function(member) {
+    $scope._loadMember = function(member, callback) {
       $scope.isLoading = true;
       $scope._activeMessageParam = member;
       Members.open(member, function() {
         Rooms.setActive(null);
         $scope.activeRoomProperty = null;
         $scope._update();
+        if (callback !== null) {
+          callback();
+        }
       });
     };
     $scope._redraw = function() {
@@ -65,9 +77,9 @@ angular.module('hipslackApp')
         return;
       }
       if ($scope.activeRoomProperty) {
-        $scope._openRoom($scope._activeMessageParam);
+        $scope._loadRoom($scope._activeMessageParam);
       } else {
-        $scope._openMember($scope._activeMessageParam);
+        $scope._loadMember($scope._activeMessageParam);
       }
     };    
     $scope._update = function() {
@@ -114,10 +126,30 @@ angular.module('hipslackApp')
     };
     $scope.toTrusted = function(htmlCode) {
       return $sce.trustAsHtml(htmlCode);
-    },
+    };
+    $scope._saveStates = function() {
+      appConfig.save({
+        rooms: $scope.openedRooms,
+        members: $scope.openedMembers,
+        isRoom: $scope.activeRoomProperty,
+        active: $scope._activeMessageParam
+      });
+    };
+    $scope._loadStates = function() {
+      appConfig.load(function(config) {
+        Rooms.openedItems = config.rooms;
+        Members.openedItems = config.members;
+        if (config.isRoom) {
+          $scope._loadRoom(config.active);
+        } else {
+          $scope._loadMember(config.active);
+        }
+      });
+    };
     $scope._redrawHookEvent = function() {
       $scope._redraw();
       setTimeout($scope._redrawHookEvent, 30000);
     };
     $scope._redrawHookEvent();
+    $scope._loadStates();
   });

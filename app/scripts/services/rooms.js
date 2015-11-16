@@ -10,7 +10,6 @@
 angular.module('hipslackApp')
   .service('Rooms', function (config, $http, $rootScope, Messages) {
     var self = this;
-    self._openedIds = [];
     self.openedItems = [];
     this.open = function(room, callback) {
       self._getMessages(room, callback);
@@ -18,17 +17,26 @@ angular.module('hipslackApp')
       self.setActive(room);
     };
     this.close = function(room) {
-      var index = self._openedIds.indexOf(room.id);
+      var index = self._indexOf(room.id);
       if (index === -1) {
         return;
       }
-      self._openedIds.splice(index, 1);
       self.openedItems.splice(index, 1);
+    };
+    this._indexOf = function(id) {
+      var res = -1,
+          index = 0;
+      self.openedItems.forEach(function(element) {
+        if (element.id === id) {
+          res = index;
+        }
+        index++;
+      });
+      return res;
     };
     this._getMessages = function(room, callback) {
       var historyUri = config.backend + '/v2/room/' + room.id + '/history?auth_token=' + config.authkey;
-      if (self._openedIds.indexOf(room.id) === -1) {
-        self._openedIds.push(room.id);
+      if (self._indexOf(room.id) === -1) {
         self.openedItems.push(room);
       }
       $http.get(historyUri).success(function(data) {
@@ -51,7 +59,7 @@ angular.module('hipslackApp')
       if (room === null) {
         return;
       }
-      var index = self._openedIds.indexOf(room.id);
+      var index = self._indexOf(room.id);
       if (index === -1) {
         return;
       }

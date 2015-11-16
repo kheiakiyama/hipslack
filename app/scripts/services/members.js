@@ -10,24 +10,32 @@
 angular.module('hipslackApp')
   .service('Members', function (config, $http, $rootScope, Messages) {
     var self = this;
-    self._openedIds = [];
     self.openedItems = [];
     this.open = function(member, callback) {
       self._getMessages(member, callback);
       self.setActive(member);
     };
     this.close = function(member) {
-      var index = self._openedIds.indexOf(member.id);
+      var index = self._indexOf(member.id);
       if (index === -1) {
         return;
       }
-      self._openedIds.splice(index, 1);
       self.openedItems.splice(index, 1);
+    };
+    this._indexOf = function(id) {
+      var res = -1,
+          index = 0;
+      self.openedItems.forEach(function(element) {
+        if (element.id === id) {
+          res = index;
+        }
+        index++;
+      });
+      return res;
     };
     this._getMessages = function(member, callback) {
       var historyUri = config.backend + '/v2/user/' + member.id + '/history?auth_token=' + config.authkey;
-      if (self._openedIds.indexOf(member.id) === -1) {
-        self._openedIds.push(member.id);
+      if (self._indexOf(member.id) === -1) {
         self.openedItems.push(member);
       }
       $http.get(historyUri).success(function(data) {
@@ -43,7 +51,7 @@ angular.module('hipslackApp')
       if (member === null) {
         return;
       }
-      var index = self._openedIds.indexOf(member.id);
+      var index = self._indexOf(member.id);
       if (index === -1) {
         return;
       }
