@@ -1,7 +1,7 @@
 <ul>
   <li ng-repeat="room in openedRooms" ng-class="{active: room.active}">
     <div ng-click="roomClick(room)" class="item">
-      <span>{{room.name}}</span>
+      <span>{{::room.name}}</span>
       <span ng-click="closeRoom(room)" class="glyphicon glyphicon-remove close"></span>
     </div>
   </li>
