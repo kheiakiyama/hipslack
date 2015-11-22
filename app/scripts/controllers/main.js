@@ -39,7 +39,7 @@ angular.module('hipslackApp')
         Members.setActive(null);
         $scope.activeRoomProperty = Rooms.activeRoomProperty;
         $scope._update();
-        if (callback !== null) {
+        if (callback !== undefined) {
           callback();
         }
       });
