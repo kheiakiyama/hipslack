@@ -1,7 +1,6 @@
 # HipSlack
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.12.1.
+HipSlack is HipChat Client, it has ui like slack.
 
 ## Install
 
@@ -13,10 +12,15 @@ set config.json
 }
 ```
 
-### Windows
+### What is API_KEY ?
+
+`API_KEY` is [personal token](https://www.hipchat.com/docs/apiv2/auth).
+
+### Where is config.json ?
+#### Windows
 %APPDATA%/hipslack/config.json
 
-### OS X
+#### OS X
 ~/Library/Application Support/hipslack/config.json
 
 
@@ -27,3 +31,4 @@ set config.json
 ## development
 
 - Run `gulp serve` for preview.
+- Run `gulp lint` for check code styles.
