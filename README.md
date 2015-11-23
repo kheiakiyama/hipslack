@@ -8,7 +8,7 @@ set config.json
 
 ```config.json
 {
-	key: '{API_KEY}'
+	"key": "{API_KEY}"
 }
 ```
 
