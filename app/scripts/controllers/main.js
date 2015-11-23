@@ -67,7 +67,7 @@ angular.module('hipslackApp')
         Rooms.setActive(null);
         $scope.activeRoomProperty = null;
         $scope._update();
-        if (callback !== null) {
+        if (callback !== undefined) {
           callback();
         }
       });
@@ -95,6 +95,10 @@ angular.module('hipslackApp')
     $scope.closeRoom = function(room) {
       Rooms.close(room);
       $scope.openedRooms = Rooms.openedItems;
+    };
+    $scope.closeMember = function(member) {
+      Members.close(member);
+      $scope.openedMembers = Members.openedItems;
     };
     $scope.sendMessageClick = function() {
       var getUrl = function () {
