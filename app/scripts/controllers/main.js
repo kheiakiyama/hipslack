@@ -100,7 +100,7 @@ angular.module('hipslackApp')
       Members.close(member);
       $scope.openedMembers = Members.openedItems;
     };
-    $scope.sendMessageClick = function() {
+    $scope.sendMessage = function() {
       var getUrl = function () {
         if ($scope.activeRoomProperty) {
           var roomId = Rooms.getActiveId();
@@ -120,9 +120,6 @@ angular.module('hipslackApp')
         $scope.inputText = "";
         $scope._redraw();
       });
-    };
-    $scope.messageBoxKeyDown = function() {
-      $scope.sendMessageClick();
     };
     $scope.linkClick = function(url) {
       shell.openExternal(url);
