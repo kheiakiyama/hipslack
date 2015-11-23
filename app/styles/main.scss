@@ -82,6 +82,11 @@ $bottom-margin: 50px;
   .title {
     font-size: 17px;
     margin: 0 $content-margin;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
   }
 }
 
@@ -123,13 +128,13 @@ $bottom-margin: 50px;
 #opened-rooms,
 #opened-members {
 
-  .active {
-    background-color: #4c9689;
-    color: #fff;
-  }
-
   .item {
-    padding: 5px 10px 5px 30px;
+    padding: 3px 10px 3px 30px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3e313c;
+    }
 
     .name {
       width: $left-margin - 70px;
@@ -144,6 +149,14 @@ $bottom-margin: 50px;
       float: right;
     }
   }
+
+  .active {
+    .item {
+      background-color: #4c9689;
+      color: #fff;
+    }
+  }
+
 }
 
 #room-topic {
