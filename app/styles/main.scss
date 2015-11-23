@@ -129,7 +129,16 @@ $bottom-margin: 50px;
   }
 
   .item {
-    padding: 5px 30px;
+    padding: 5px 10px 5px 30px;
+
+    .name {
+      width: $left-margin - 70px;
+      height: 17px;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
     .close {
       float: right;

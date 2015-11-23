@@ -1,7 +1,7 @@
 <ul>
   <li ng-repeat="member in openedMembers" ng-class="{active: member.active}">
     <div ng-click="memberClick(member)" class="item">
-      <span>{{::member.name}}</span>
+      <span class="name">{{::member.name}}</span>
       <span ng-click="closeMember(member)" class="glyphicon glyphicon-remove close"></span>
     </div>
   </li>
