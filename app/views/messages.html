@@ -33,6 +33,5 @@
   </li>
 </ul>
 <div id="message-form" ng-if="groupMessages">
-  <textarea class="message" ng-model="$parent.inputText" my-chat-key-down="messageBoxKeyDown()"></textarea>
-  <input type="button" class="button" ng-click="sendMessageClick()" value="Send">
+  <textarea class="message" ng-model="$parent.inputText" my-chat-key-down="sendMessage()"></textarea>
 </div>
