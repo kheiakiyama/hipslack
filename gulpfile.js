@@ -121,7 +121,7 @@ gulp.task('package', ['win32', 'darwin'].map(function (platform) {
       platform: platform,
       out: releaseDir,
       overwrite: true,
-      version: '0.30.0'
+      version: '0.34.1'
     }, function (err) {
       done();
     });
