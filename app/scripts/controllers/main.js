@@ -101,6 +101,8 @@ angular.module('hipslackApp')
       $scope.openedMembers = Members.openedItems;
     };
     $scope.sendMessage = function() {
+      var message = $scope.inputText;
+      $scope.inputText = "";
       var getUrl = function () {
         if ($scope.activeRoomProperty) {
           var roomId = Rooms.getActiveId();
@@ -114,7 +116,7 @@ angular.module('hipslackApp')
       $http({
         method: 'POST',
         url: uri, 
-        data: { message: $scope.inputText }, 
+        data: { message: message }, 
         headers: { 'Authorization': 'Bearer ' + config.authkey }
       }).success(function() {
         $scope.inputText = "";
