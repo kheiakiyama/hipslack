@@ -64,6 +64,8 @@ gulp.task('vendor', function () {
     .pipe(gulp.dest(distDir));
   gulp.src('bower_components/bootstrap/dist/fonts/*')
     .pipe(gulp.dest(distDir + '/fonts'));
+  gulp.src(['bower_components/react/react.min.js', 'bower_components/react/react-dom.min.js'])
+    .pipe(gulp.dest(distDir));
   return gulp.src(mainBowerFiles({
       overrides: {
         bootstrap: {
