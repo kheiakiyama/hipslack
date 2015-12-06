@@ -3,7 +3,7 @@
   "private": true,
   "main": "main.js",
   "version": "0.0.1",
-  "electronVersion": "0.34.1",
+  "electronVersion": "0.35.2",
   "devDependencies": {
     "del": "^2.0.2",
     "electron-connect": "^0.3.3",
