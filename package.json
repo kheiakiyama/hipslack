@@ -17,9 +17,13 @@
     "gulp-plumber": "^1.0.1",
     "gulp-sass": "^2.1.0",
     "gulp-scss-lint": "^0.3.8",
+    "gulp-tslint": "^4.1.2",
+    "gulp-typescript": "^2.10.0",
     "gulp-uglify": "^1.4.2",
     "gulp-useref": "^2.1.0",
-    "main-bower-files": "^2.9.0"
+    "main-bower-files": "^2.9.0",
+    "tslint": "^3.2.0",
+    "typescript": "^1.7.3"
   },
   "engines": {
     "node": ">=0.10.0"

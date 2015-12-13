@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var typescript = require('typescript');
 var $ = require('gulp-load-plugins')();
 var mainBowerFiles = require('main-bower-files');
 var electronServer = require('electron-connect').server;
@@ -12,6 +13,7 @@ var appDir = 'app/' + '';
 var distDir = 'dist';
 var serveDir = '.serve';
 var releaseDir = 'release';
+var project = $.typescript.createProject('./tsconfig.json', {typescript: typescript});
 
 gulp.task('html', function () {
   gulp.src(appDir + '/*.html')
@@ -21,6 +23,14 @@ gulp.task('html', function () {
   return gulp.src(appDir + '/views/*.html')
     .pipe(gulp.dest(serveDir + '/views'))
     .pipe(gulp.dest(distDir + '/views'));
+});
+
+gulp.task('ts-compile', function () {
+  return gulp.src(appDir + '/**/*{ts,tsx}')
+    .pipe($.typescript(project))
+    .js
+    .pipe(gulp.dest(serveDir))
+    .pipe(gulp.dest(distDir));
 });
 
 gulp.task('js', function () {
@@ -87,7 +97,7 @@ gulp.task('vendor', function () {
     .pipe(gulp.dest(distDir + '/vendor'));
 });
 
-gulp.task('build', ['html', 'js', 'css', 'app', 'vendor', 'lint'], function () {
+gulp.task('build', ['html', 'ts-compile', 'js', 'css', 'app', 'vendor', 'lint'], function () {
   return console.log('build finished!');
 });
 
@@ -131,6 +141,12 @@ gulp.task('package', ['win32', 'darwin'].map(function (platform) {
   return taskName;
 }));
 
+gulp.task('ts-lint', function() {
+  return gulp.src(appDir + '/**/*.ts')
+    .pipe($.tslint())
+    .pipe($.tslint.report('verbose'));
+});
+
 gulp.task('js-hint', function() {
   return gulp.src(appDir + '/**/*.js')
     .pipe($.jshint())
@@ -144,7 +160,7 @@ gulp.task('scss-lint', function() {
     }));
 });
 
-gulp.task('lint', ['js-hint', 'scss-lint'], function() {
+gulp.task('lint', ['ts-lint', 'js-hint', 'scss-lint'], function() {
 });
 
 gulp.task('default', ['build', 'watch'], function () {
