@@ -29,5 +29,10 @@
     "node": ">=0.10.0"
   },
   "author": "kheiakiyama",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "redux": "^3.0.5"
+  }
 }
