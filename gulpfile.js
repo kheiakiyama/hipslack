@@ -112,6 +112,7 @@ gulp.task('serve', ['build', 'watch'], function () {
 
 gulp.task('watch', function() {
   gulp.watch(['main.js', appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'], ['js', 'js-hint']);
+  gulp.watch([appDir + '/**/*{ts,tsx}'], ['ts-compile']);
   gulp.watch([appDir + '/styles/*.scss'], ['css', 'scss-lint']);
   gulp.watch([appDir + '/*.html', appDir + '/views/*.html'], ['html']);
   gulp.watch('gulpfile.js', ['build']);
