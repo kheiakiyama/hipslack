@@ -29,11 +29,10 @@
     </script>
     <!-- Add your site or application content here -->
     <div id="app">
+    </div>
+    <!--
+    <div id="app">
       <div id="col-rooms">
-        <div id="rooms">
-          <div ng-click="roomsClick()" class="title">Rooms</div>
-          <div id="opened-rooms" data-ng-include="'views/opened-rooms.html'"></div>
-        </div>
         <div id="direct-messages">
           <div ng-click="membersClick()" class="title">Direct Messages</div>
           <div id="opened-members" data-ng-include="'views/opened-members.html'"></div>
@@ -55,6 +54,7 @@
       <div id="room-property" ng-include="'views/room-property.html'" ng-if="activeRoomProperty">
       </div>
     </div>
+    -->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -68,28 +68,15 @@
 
     <!-- build:js(.) jquery.min.js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script>window.jQuery = require('../bower_components/jquery/dist/jquery');</script>
     <!-- endbuild -->
     <!-- build:js(.) vendor/vendor.js -->
     <!-- bower:js -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../bower_components/react/react.js"></script>
-    <script src="../bower_components/react/react-dom.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.) scripts/main.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/rooms-modal.js"></script>
-    <script src="scripts/directives/include.js"></script>
-    <script src="scripts/directives/chat-keydown.js"></script>
-    <script src="scripts/directives/compile.js"></script>
-    <script src="scripts/services/messages.js"></script>
-    <script src="scripts/services/rooms.js"></script>
-    <script src="scripts/services/members.js"></script>
-    <script src="scripts/controllers/direct-messages-modal.js"></script>
+    <script src="index.js"></script>
     <!-- endbuild -->
     <!-- build:remove-->
     <script>require('electron-connect').client.create()</script>

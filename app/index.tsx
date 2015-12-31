@@ -6,7 +6,6 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import '../src-scss/main.css!';
 
 import {
   Store,

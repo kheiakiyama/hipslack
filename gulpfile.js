@@ -8,6 +8,8 @@ var electronServer = require('electron-connect').server;
 var packager = require('electron-packager');
 var pkg = require('./package.json');
 var del = require('del');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 
 var appDir = 'app/' + '';
 var distDir = 'dist';
@@ -25,10 +27,18 @@ gulp.task('html', function () {
     .pipe(gulp.dest(distDir + '/views'));
 });
 
-gulp.task('ts-compile', function () {
+gulp.task('ts', function () {
   return gulp.src(appDir + '/**/*{ts,tsx}')
     .pipe($.typescript(project))
     .js
+    .pipe(gulp.dest(serveDir))
+    .pipe(gulp.dest(distDir));
+});
+
+gulp.task('ts-compile', ['ts'], function () {
+  var b = browserify(serveDir + '/index.js');
+  return b.bundle()
+    .pipe(source('index.js'))
     .pipe(gulp.dest(serveDir))
     .pipe(gulp.dest(distDir));
 });

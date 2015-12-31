@@ -17,9 +17,7 @@ class App extends React.Component<any, any> {
     const roomActions = bindActionCreators(RoomActions, dispatch);
 
     return (
-      <div id="app">
-        <SideBar rooms={rooms} roomActions={roomActions} />
-      </div>
+      <SideBar rooms={rooms} roomActions={roomActions} />
     );
   }
 }
