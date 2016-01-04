@@ -15,7 +15,13 @@ const closeRoom = createAction<Room>(
   (room: Room) => room
 );
 
+const newRoom = createAction<Room>(
+  types.NEW_ROOM,
+  (room: Room) => room
+);
+
 export {
   openRoom,
-  closeRoom
+  closeRoom,
+  newRoom
 }

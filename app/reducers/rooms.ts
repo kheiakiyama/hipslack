@@ -6,6 +6,7 @@ import { Room } from '../models/rooms';
 import {
   OPEN_ROOM,
   CLOSE_ROOM,
+  NEW_ROOM,
 } from '../constants/ActionTypes';
 
 const initialState = [];
@@ -16,6 +17,10 @@ export default handleActions<Room[]>({
   },
   
   [CLOSE_ROOM]: (state: Room[], action: Action): Room[] => {
+    return <Room[]>state.map(room => room);
+  },
+    
+  [NEW_ROOM]: (state: Room[], action: Action): Room[] => {
     return <Room[]>state.map(room => room);
   }
 }, initialState);
