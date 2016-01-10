@@ -10,6 +10,7 @@ var pkg = require('./package.json');
 var del = require('del');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 var appDir = 'app/' + '';
 var distDir = 'dist';
@@ -36,9 +37,13 @@ gulp.task('ts', function () {
 });
 
 gulp.task('ts-compile', ['ts'], function () {
-  var b = browserify(serveDir + '/index.js');
-  return b.bundle()
+  return browserify(serveDir + '/index.js', { debug: true })
+    .bundle()
     .pipe(source('index.js'))
+    .pipe(buffer())
+    .pipe($.sourcemaps.init({loadMaps: true}))
+    .pipe($.uglify())
+    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(serveDir))
     .pipe(gulp.dest(distDir));
 });
