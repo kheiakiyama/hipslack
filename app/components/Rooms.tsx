@@ -1,5 +1,7 @@
 /// <reference path='../../typings/react/react.d.ts'/>
 
+declare var require: any;
+
 import * as React from 'react';
 var Modal = require('react-modal');
 
@@ -53,10 +55,10 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
         <Modal
             id="rooms-dialog"
             isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}>
+            onRequestClose={this.closeModal.bind(this)}>
             <h3>
                 Select Room
-                <button type="button" className="glyphicon glyphicon-remove close" ng-click="closeClick()"></button>
+                <button type="button" className="glyphicon glyphicon-remove close" onClick={this.closeModal.bind(this)}></button>
             </h3>
             <ul className="content">
                 <li ng-repeat="room in rooms" className="room">
