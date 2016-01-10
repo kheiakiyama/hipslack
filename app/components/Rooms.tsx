@@ -1,8 +1,7 @@
 /// <reference path='../../typings/react/react.d.ts'/>
-/// <reference path='../../typings/react-modal/react-modal.d.ts'/>
 
 import * as React from 'react';
-import * as ReactModal from 'react-modal';
+var Modal = require('react-modal');
 
 interface RoomsProps {
   actions: any;
@@ -51,7 +50,7 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
           )}
           </ul>
         </div>
-        <ReactModal.Modal
+        <Modal
             id="rooms-dialog"
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}>
@@ -64,7 +63,7 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
                     <div ng-click="roomClick(room)">room.name</div>
                 </li>
             </ul>
-        </ReactModal.Modal>
+        </Modal>
       </div>
     );
   }
