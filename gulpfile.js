@@ -120,13 +120,12 @@ gulp.task('serve', ['build', 'watch'], function () {
   var electron = electronServer.create({ path: serveDir });
   electron.start();
   
-  gulp.watch(['main.js'], electron.restart);
-  gulp.watch([serveDir + '/scripts/*.js'], electron.restart);
+  gulp.watch([serveDir + '/**/*.js'], electron.restart);
   gulp.watch([serveDir + '/**/*.html', serveDir + '/styles/*.css'], electron.reload);
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['main.js', appDir + '/scripts/*.js', appDir + '/scripts/**/*.js'], ['js', 'js-hint']);
+  gulp.watch(['main.js', appDir + '/**/*.js'], ['js', 'js-hint']);
   gulp.watch([appDir + '/**/*{ts,tsx}'], ['ts-compile']);
   gulp.watch([appDir + '/styles/*.scss'], ['css', 'scss-lint']);
   gulp.watch([appDir + '/*.html', appDir + '/views/*.html'], ['html']);
