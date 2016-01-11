@@ -6,7 +6,7 @@ declare var global: any;
 import * as React from 'react';
 var Modal = require('react-modal');
 var remote = global.require('remote');
-var Hipchatter = remote.require('hipchatter');
+var HipchatFactory = remote.require('./lib/hipchat-factory');
 
 interface IRoom {
   id: string;
@@ -30,7 +30,7 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
   
   constructor(props?: RoomsProps, context?: any) {
     super(props, context);
-    this.hipchat = new Hipchatter('{Key}');
+    this.hipchat = HipchatFactory.GetClient();
     this.state = {
       modalIsOpen: false,
       rooms: this.rooms
