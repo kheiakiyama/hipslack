@@ -1,3 +1,6 @@
+declare var require: any;
+declare var module: any;
+
 var app = require('app');
 var Hipchatter = require('hipchatter');
 var userConfig = require('./config');
