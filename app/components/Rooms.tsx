@@ -85,21 +85,22 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
           )}
           </ul>
         </div>
-        <Modal
-            id="rooms-dialog"
+        <Modal            
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal.bind(this)}>
-            <h3>
-                Select Room
-                <button type="button" className="glyphicon glyphicon-remove close" onClick={this.closeModal.bind(this)}></button>
+          <div id="rooms-dialog">
+            <h3 className="title">
+              Select Room
+              <button type="button" className="glyphicon glyphicon-remove close" onClick={this.closeModal.bind(this)}></button>
             </h3>
             <ul className="content">
             {this.rooms.map(room =>
-                <li key={room.id} className="room">
-                    <div onClick={this.openRoom.bind(this, room)}>{room.name}</div>
-                </li>
+              <li key={room.id} className="room">
+                <div onClick={this.openRoom.bind(this, room)}>{room.name}</div>
+              </li>
             )}
             </ul>
+          </div>
         </Modal>
       </div>
     );

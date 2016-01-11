@@ -109,6 +109,11 @@ $bottom-margin: 50px;
 // inside modal
 
 #rooms-dialog {
+
+  .title {
+    margin-top: 0;
+  }
+
   .room {
     margin: 5px 0;
   }
