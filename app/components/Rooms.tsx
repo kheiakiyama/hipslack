@@ -1,9 +1,17 @@
 /// <reference path='../../typings/react/react.d.ts'/>
 
 declare var require: any;
+declare var global: any;
 
 import * as React from 'react';
 var Modal = require('react-modal');
+var remote = global.require('remote');
+var Hipchatter = remote.require('hipchatter');
+
+interface IRoom {
+  id: string;
+  name: string;
+}
 
 interface RoomsProps {
   actions: any;
@@ -12,27 +20,52 @@ interface RoomsProps {
 
 interface RoomsStates {
   modalIsOpen: boolean;
+  rooms: IRoom[];
 }
 
 class Rooms extends React.Component<RoomsProps, RoomsStates> {
 
+  private hipchat = null;
+  private rooms: IRoom[] = [];
+  
   constructor(props?: RoomsProps, context?: any) {
     super(props, context);
+    this.hipchat = new Hipchatter('{Key}');
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      rooms: this.rooms
     };
   }
 
   selectRoom(): void {
-    this.setState({modalIsOpen: true});
+    this.hipchat.rooms((err, rooms) => {
+      if(!err) {
+        this.rooms = rooms;
+        this.setState({
+          modalIsOpen: true, 
+          rooms: this.rooms
+        });
+      }
+    });
+    this.setState({
+      modalIsOpen: true, 
+      rooms: this.rooms
+    });
   }
 
   closeModal(): void {
-    this.setState({modalIsOpen: false});
+    this.setState({
+      modalIsOpen: false,
+      rooms: this.rooms
+    });
   }
 
   handleNewRoom(): void {
     this.props.actions.newRoom();
+  }
+  
+  openRoom(room: IRoom): void {
+    console.log(room);
   }
 
   render() {
@@ -61,9 +94,11 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
                 <button type="button" className="glyphicon glyphicon-remove close" onClick={this.closeModal.bind(this)}></button>
             </h3>
             <ul className="content">
-                <li ng-repeat="room in rooms" className="room">
-                    <div ng-click="roomClick(room)">room.name</div>
+            {this.rooms.map(room =>
+                <li key={room.id} className="room">
+                    <div onClick={this.openRoom.bind(this, room)}>{room.name}</div>
                 </li>
+            )}
             </ul>
         </Modal>
       </div>
