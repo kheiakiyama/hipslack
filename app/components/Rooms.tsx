@@ -13,27 +13,34 @@ interface IRoom {
   name: string;
 }
 
+interface IHipslackRoom extends IRoom {
+  active: boolean;
+}
+
 interface RoomsProps {
   actions: any;
-  openedRooms: any;
+  openedRooms: IHipslackRoom[];
 };
 
 interface RoomsStates {
   modalIsOpen: boolean;
   rooms: IRoom[];
+  openedRooms: IHipslackRoom[];
 }
 
 class Rooms extends React.Component<RoomsProps, RoomsStates> {
 
   private hipchat = null;
   private rooms: IRoom[] = [];
+  private openedRooms: IHipslackRoom[] = [];
   
   constructor(props?: RoomsProps, context?: any) {
     super(props, context);
     this.hipchat = HipchatFactory.GetClient();
     this.state = {
       modalIsOpen: false,
-      rooms: this.rooms
+      rooms: this.rooms,
+      openedRooms: this.openedRooms
     };
   }
 
@@ -41,23 +48,14 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
     this.hipchat.rooms((err, rooms) => {
       if(!err) {
         this.rooms = rooms;
-        this.setState({
-          modalIsOpen: true, 
-          rooms: this.rooms
-        });
+        this._updateState(true);
       }
     });
-    this.setState({
-      modalIsOpen: true, 
-      rooms: this.rooms
-    });
+    this._updateState(true);
   }
 
   closeModal(): void {
-    this.setState({
-      modalIsOpen: false,
-      rooms: this.rooms
-    });
+    this._updateState(false);
   }
 
   handleNewRoom(): void {
@@ -65,21 +63,53 @@ class Rooms extends React.Component<RoomsProps, RoomsStates> {
   }
   
   openRoom(room: IRoom): void {
-    console.log(room);
+    this.openedRooms.forEach(function(item) {
+      item.active = false;
+    });
+    let index = this._indexOf(room);
+    if (index === -1) {
+      this.openedRooms.push({
+        id: room.id,
+        name: room.name,
+        active: true
+      });
+    } else {
+      this.openedRooms[index].active = true;
+    }
+    this._updateState(false);
+  }
+  
+  _updateState(modalIsOpen: boolean): void {
+    this.setState({
+      modalIsOpen: modalIsOpen,
+      rooms: this.rooms,
+      openedRooms: this.openedRooms
+    });
+  }
+  
+  _indexOf(room: IRoom): number {
+    let res = -1;
+    this.openedRooms.forEach((item, index) => {
+      if (item.id === room.id) {
+        res = index;
+      }
+    });
+    return res;
   }
 
   render() {
-    const { openedRooms, actions } = this.props;
+    const { actions } = this.props;
+    const { openedRooms } = this.state;
     return (
       <div id="rooms">
         <div onClick={this.selectRoom.bind(this)} className="title">Rooms</div>
         <div id="opened-rooms">
           <ul>
           {openedRooms.map(room =>
-            <li className={room.active ? "active" : ""}>
-              <div onClick={actions.openRoom(room)} className="item">
+            <li key={room.id} className={room.active ? "active" : ""}>
+              <div onClick={actions.openRoom.bind(this, room)} className="item">
                 <span className="name">{room.name}</span>
-                <span onClick={actions.closeRoom(room)} className="glyphicon glyphicon-remove close"></span>
+                <span onClick={actions.closeRoom.bind(this, room)} className="glyphicon glyphicon-remove close"></span>
               </div>
             </li>
           )}
