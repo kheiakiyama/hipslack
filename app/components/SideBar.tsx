@@ -6,16 +6,19 @@ import Rooms from './Rooms';
 
 interface SideBarProps {
   roomActions: any;
+  hipChatRoomActions: any;
   rooms: any;
+  openedRooms: any;
 };
 
 class SideBar extends React.Component<SideBarProps, any> {
 
   render() {
-    const { rooms, roomActions } = this.props;
+    const { rooms, openedRooms, roomActions, hipChatRoomActions } = this.props;
     return (
       <div id="col-rooms">
-        <Rooms openedRooms={rooms} actions={roomActions} />
+        <Rooms rooms={rooms} openedRooms={openedRooms} 
+               actions={roomActions} hipchatActions={hipChatRoomActions} />
         <div id="title">HipSlack</div>
       </div>
     );

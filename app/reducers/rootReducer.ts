@@ -3,9 +3,11 @@
 import { combineReducers } from 'redux';
 
 import rooms from './rooms';
+import hipchatRooms from './hipchatRooms';
 
 const rootReducer = combineReducers({
-  rooms: rooms
+  openedRooms: rooms,
+  rooms: hipchatRooms
 });
 
 export { rootReducer };
